@@ -1,0 +1,72 @@
+slidy: "1"
+variables:
+  customMessage: "Complete" # Gets  ${Local.var.customMessage}
+  get: flutter pub get
+  runner: flutter pub run build_runner
+  clean: flutter clean
+
+scripts:
+  # Simple command (slidy run doctor)
+  doctor: flutter doctor
+
+  runner:
+    name: "Runner"
+    description: "Runner"
+    run: flutter pub run build_runner --use-polling-watcher
+
+  get-package:
+    name: "GetPackages"
+    description: "Get packages"
+    run: flutter pub get
+
+  watch:
+    steps:
+      - name: "Clean"
+        run:  ${Local.var.clean} 
+
+      - name: "Get"
+        run:  ${Local.var.get} 
+
+      - name: "Runner"
+        run:  ${Local.var.runner} watch --delete-conflicting-outputs 
+
+  
+  build_finalRelease: 
+    name: "Final release"
+    # --no-shrink
+    # run: flutter build apk --release --flavor finalRelease -v -t lib/main_final_release.dart 
+    run: flutter build appbundle --release --flavor finalRelease -v -t lib/main_final_release.dart 
+    # run: flutter build apk --split-per-abi --release --flavor finalRelease -v -t lib/main_final_release.dart 
+  install_finalRelease: 
+    name: "Install Final release"
+    run: flutter install --flavor finalRelease 
+
+  # Descritive command (slidy run clean)
+  clean:
+    name: "Clean"
+    description: "minha descricao"
+    run: flutter clean
+
+  # Steped command (slidy run cleanup)
+  cleanup:
+    description: "cleanup project"
+    steps:
+      - name: "Clean"
+        run: flutter clean
+
+      - name: "GetPackages"
+        description: "Get packages"
+        run: flutter pub get
+
+      - name: "PodClean"
+        description: "Execute pod clean"
+        shell: bash # default: command. options (command|bash|sh|zsh|pwsh)
+        condition: "${System.operatingSystem} == macos"
+        working-directory: ios
+        run: |-
+          rm Podfile.lock
+          pod deintegrate
+          pod update
+          pod install
+
+      - run: echo ${Local.var.customMessage}
