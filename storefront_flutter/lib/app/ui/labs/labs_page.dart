@@ -17,6 +17,7 @@ class LabsPage extends StatefulWidget {
 class _LabsPageState extends State<LabsPage> {
 
   late final LabsController store;
+ScrollController mScrollController = ScrollController();
 
   @override
   void initState() {
@@ -31,9 +32,11 @@ class _LabsPageState extends State<LabsPage> {
         title: Text(widget.title),
       ),
       body: Scrollbar(
+        controller: mScrollController,
         child: Padding(
           padding: EdgeInsets.all(12.0),
           child: SingleChildScrollView(
+            controller: mScrollController,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
@@ -121,9 +124,9 @@ class _LabsPageState extends State<LabsPage> {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    child: const Text('Commune'),
+                    child: const Text('Product'),
                     onPressed: () {
-                      Modular.to.pushNamed(UiConstants.Routes.labsCommune);
+                      Modular.to.pushNamed(UiConstants.Routes.products+"232");
                     },
                   ),
                 ),

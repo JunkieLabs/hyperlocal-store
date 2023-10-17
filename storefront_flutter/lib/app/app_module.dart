@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:storefront_flutter/app/ui/app_default_page.dart';
 import 'package:storefront_flutter/app/ui/labs/labs_module.dart';
+import 'package:storefront_flutter/app/ui/pages/products/products_module.dart';
 
 import 'ui/pages/home/home_module.dart';
 
@@ -25,6 +26,7 @@ class AppModule extends Module {
     // r.child('/', child: (context) => HomeModule());
      r.child('/', child: (context) => AppDefaultPage());
      r.module('/labs', module: LabsModule());
+    r.module('/products', module:  ProductsModule());
     r.module('/home', module:  HomeModule());
     // super.routes(r);
   }

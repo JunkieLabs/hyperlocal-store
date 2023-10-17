@@ -26,10 +26,10 @@ class _Routes {
   
   final String contacts = '/contacts/';
 
-  final String communes = '/communes/';
-  final String communesEdit = '/communes/edit';
-  final String communesConfigure = '/communes/configure';
-  final String communeDetail = '/communes/detail';
+  final String products = '/products/';
+  final String productsEdit = '/products/edit';
+  final String productsConfigure = '/products/configure';
+  final String communeDetail = '/products/detail';
   final String communeRequests = '/commune-requests/';
 
   
